@@ -36,3 +36,29 @@ try:
 except Exception as e:
     print("There was a problem genering the diagram")
     raise e
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('post.id'))
+    user = relationship(User)
+
+class Post(Base):
+    __tablename__ = 'post'
+    id = Column(Integer, primary_key=True)
+    post_id = Column(Integer, ForeignKey('user.id'))
+    post = relationship(Post)
+
+class Likes(Base):
+    __tablename__ = 'likes'
+    id = Column(Integer, primary_key=True)
+    likes_id = Column(Integer, ForeignKey('post.id'))
+    likes = relationship(Likes)
+
+class Comments(Base):
+    __tablename__ = 'post'
+    id = Column(Integer, primary_key=True)
+    comments_id = Column(Integer, ForeignKey('post.id'))
+    comments = relationship(Comments)
+
+    
